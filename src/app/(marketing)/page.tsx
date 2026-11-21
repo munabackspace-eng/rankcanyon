@@ -27,7 +27,7 @@ export const metadata = buildMetadata({
 export default function HomePage() {
   return (
     <>
-      {/* <Hero /> */}
+      <Hero />
       <TrustBar />
       <CaseStudiesTeaser />
       <ResearchBenchmarks />
