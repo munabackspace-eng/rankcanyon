@@ -1,0 +1,324 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+/* ---------------------------------------------------------------------------
+ * Design tokens (inspired by Employo's light + #232020 charcoal + #2674BC/#2AABE2 palette)
+ *
+ * Light surfaces use #FFFFFF (--background), #F4F4F4 (--surface), #F0F0F0 (--card),
+ * and #EBF5FB (--ice), paired with #232020 (--navy-950 / --charcoal) boxed sections
+ * and #2674BC / #2AABE2 (--brand-600 / --brand-500) buttons and highlights.
+ * ------------------------------------------------------------------------- */
+:root {
+  /* Ink & Charcoal (#232020 scale) */
+  --navy-50: #f4f4f4;
+  --navy-100: #f0f0f0;
+  --navy-200: #d8d8d8;
+  --navy-300: #b5b4b4;
+  --navy-400: #8c8a8a;
+  --navy-500: #696767;
+  --navy-600: #575555;
+  --navy-700: #3c3939;
+  --navy-800: #2e2b2b;
+  --navy-900: #181616;
+  --navy-950: #232020;
+
+  /* Employo Blue & Cyan (#2674BC primary blue + #2AABE2 vibrant cyan) */
+  --brand-50: #f4fafe;
+  --brand-100: #ebf5fb;
+  --brand-200: #cae8f6;
+  --brand-300: #a3dbf2;
+  --brand-400: #56b7e3;
+  --brand-500: #2aabe2;
+  --brand-600: #2674bc;
+  --brand-700: #1e609e;
+  --brand-800: #255685;
+  --brand-900: #1c3f63;
+  --brand-950: #122940;
+
+  --highlight: var(--brand-600);
+
+  /* Surface & card palette */
+  --background: #ffffff;
+  --surface: #f4f4f4;
+  --ice: #ebf5fb;
+  --card: #f0f0f0;
+  --charcoal: #232020;
+
+  /* Semantic */
+  --foreground: var(--navy-950);
+  --muted: #575555;
+  --border: rgb(35 32 32 / 0.1);
+
+  --header-height: 5.75rem;
+}
+
+/* ---------------------------------------------------------------------------
+ * Base
+ * ------------------------------------------------------------------------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-balance;
+  }
+
+  ::selection {
+    @apply bg-brand-600 text-white;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Surface gradients (built from --background #FFFFFF, --ice #EBF5FB, --surface #F4F4F4)
+ * ------------------------------------------------------------------------- */
+
+/* Soft vertical fades between surfaces */
+@utility bg-fade-down {
+  background-image: linear-gradient(to bottom, var(--background), var(--surface));
+}
+
+@utility bg-fade-up {
+  background-image: linear-gradient(to bottom, var(--surface), var(--background));
+}
+
+/* Hero & banner backdrop: soft #EBF5FB glow in the top-left, clean #FFFFFF / #F4F4F4 elsewhere */
+@utility bg-spotlight {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(56% 72% at 14% 18%, var(--ice) 0%, transparent 74%),
+    radial-gradient(60% 75% at 88% 25%, var(--surface) 0%, transparent 75%),
+    linear-gradient(160deg, var(--background) 0%, var(--surface) 100%);
+}
+
+/* Card sheen: blend between #FFFFFF and #EBF5FB */
+@utility bg-sheen {
+  background-color: var(--ice);
+  background-image: linear-gradient(155deg, var(--background) 0%, var(--ice) 100%);
+}
+
+/* Inverse sheen for recessed cards: #EBF5FB → #FFFFFF */
+@utility bg-sheen-inverse {
+  background-color: var(--background);
+  background-image: linear-gradient(155deg, var(--ice) 0%, var(--background) 100%);
+}
+
+/* Footer panel: diagonal blend of #EBF5FB → #FFFFFF → #F4F4F4 */
+@utility bg-footer {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(65% 85% at 15% 15%, var(--ice) 0%, transparent 70%),
+    radial-gradient(60% 80% at 85% 20%, var(--surface) 0%, transparent 72%),
+    linear-gradient(135deg, var(--ice) 0%, var(--background) 52%, var(--surface) 100%);
+}
+
+/* Gradient border: wrap content in an element with this + p-px */
+@utility border-sheen {
+  background-image: linear-gradient(
+    160deg,
+    var(--background),
+    var(--border) 40%,
+    var(--background)
+  );
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+/* Employo blue-to-cyan gradient text for emphasis (#2674BC → #2AABE2) */
+@utility text-gradient {
+  @apply bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent;
+}
+
+/* ---------------------------------------------------------------------------
+ * Looping SVG animations (60fps CSS keyframes for Amazon workflow graphics)
+ * ------------------------------------------------------------------------- */
+@keyframes svg-dash-flow {
+  from {
+    stroke-dashoffset: 48;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes svg-draw-loop {
+  0%,
+  100% {
+    stroke-dashoffset: 180;
+    opacity: 0.35;
+  }
+  35%,
+  75% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes svg-scan-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(46px);
+  }
+}
+
+@keyframes svg-float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes svg-pulse-ring {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.16);
+    opacity: 0.3;
+  }
+}
+
+@keyframes svg-orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hero-card-wave {
+  0%,
+  100% {
+    transform: translate3d(0, -16px, 0);
+  }
+  50% {
+    transform: translate3d(0, 16px, 0);
+  }
+}
+
+@keyframes svg-wave-travel {
+  from {
+    stroke-dashoffset: 1180;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes svg-card-bob {
+  0%,
+  100% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes dot-seq {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.animate-hero-wave {
+  animation: hero-card-wave 3.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.animate-svg-wave {
+  animation: svg-wave-travel 4.4s linear infinite;
+}
+
+.animate-svg-bob {
+  animation: svg-card-bob 3.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.animate-dot-seq {
+  animation: dot-seq 1.5s ease-in-out infinite;
+}
+
+.animate-svg-dash {
+  animation: svg-dash-flow 2.8s linear infinite;
+}
+
+.animate-svg-draw {
+  stroke-dasharray: 180;
+  animation: svg-draw-loop 4.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-svg-scan {
+  animation: svg-scan-y 3.6s ease-in-out infinite;
+}
+
+.animate-svg-float {
+  animation: svg-float-soft 3.4s ease-in-out infinite;
+}
+
+.animate-svg-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svg-pulse-ring 2.4s ease-in-out infinite;
+}
+
+.animate-svg-orbit {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svg-orbit-spin 14s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-grow-up,
+  .animate-hero-wave,
+  .animate-svg-wave,
+  .animate-svg-bob,
+  .animate-dot-seq,
+  .animate-svg-dash,
+  .animate-svg-draw,
+  .animate-svg-scan,
+  .animate-svg-float,
+  .animate-svg-pulse,
+  .animate-svg-orbit {
+    animation: none !important;
+  }
+}
