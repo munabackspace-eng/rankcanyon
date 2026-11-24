@@ -27,7 +27,7 @@ export function Header() {
       <div className="flex items-center gap-2.5 pr-3 sm:gap-3 sm:pr-5 lg:pr-6 xl:pr-7">
         <Link
           href={PRIMARY_CTA.href}
-          className="relative z-30 hidden px-2 py-2 font-sans text-sm font-bold text-navy-950/90 transition-colors duration-300 group-data-[surface=glass]/header:text-white/92 after:absolute after:inset-x-2 after:bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-brand-500 after:transition-transform after:duration-300 hover:text-brand-600 group-data-[surface=glass]/header:hover:text-brand-400 hover:after:scale-x-100 focus-visible:outline-2 focus-visible:outline-brand-500 min-[400px]:inline-block sm:px-3 sm:text-base"
+          className="relative z-30 hidden px-2 py-2 font-sans text-sm font-bold text-navy-950 transition-colors duration-300 group-data-[surface=glass]/header:text-white after:absolute after:inset-x-2 after:bottom-1 after:h-0.5 after:rounded-full after:bg-brand-500 after:transition-colors after:duration-300 hover:text-brand-600 hover:after:bg-brand-600 group-data-[surface=glass]/header:hover:text-brand-400 group-data-[surface=glass]/header:hover:after:bg-brand-400 focus-visible:outline-2 focus-visible:outline-brand-500 min-[400px]:inline-block sm:px-3 sm:text-base sm:after:inset-x-3"
         >
           Free Audit
         </Link>

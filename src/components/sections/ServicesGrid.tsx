@@ -57,7 +57,7 @@ function ServiceCards({
           service.slug === "product-image-creative-design";
 
         const contentBlock = (
-          <div className={cn("flex flex-col", svgFirst && "mt-auto pt-7")}>
+          <div className="flex flex-col">
             <h3 className="font-display text-2xl leading-snug font-extrabold tracking-tight text-navy-950 sm:text-[1.65rem]">
               <Link
                 href={`/services/${service.slug}`}
@@ -103,7 +103,7 @@ function ServiceCards({
         );
 
         const svgBlock = (
-          <div className={cn(!svgFirst && "mt-auto pt-7")}>
+          <div className="flex flex-1 flex-col">
             <ServiceInteractiveSvg slug={service.slug} />
           </div>
         );
@@ -113,7 +113,7 @@ function ServiceCards({
             <Reveal delay={(i % 2) * 0.08} className="flex w-full">
               <article
                 className={cn(
-                  "group relative flex w-full flex-col rounded-[1.75rem] border-2 border-navy-950 bg-surface p-6 transition-all duration-300 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#ebf5fb] sm:p-8 lg:p-9",
+                  "group relative flex w-full flex-col gap-7 rounded-[1.75rem] border-2 border-navy-950 bg-surface p-6 transition-all duration-300 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#ebf5fb] sm:p-8 lg:p-9",
                   onDark
                     ? "shadow-[6px_7px_0_0_#2aabe2] hover:shadow-[8px_9px_0_0_#2aabe2]"
                     : "shadow-[6px_7px_0_0_#232020] hover:shadow-[8px_9px_0_0_#2aabe2]",

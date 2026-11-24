@@ -571,20 +571,20 @@ const HeroSection = ({
   return (
     <section
       className={cn(
-        "relative isolate flex w-full flex-col overflow-x-clip bg-background",
+        "relative isolate flex w-full flex-col overflow-x-clip bg-ice",
         hasBrands
-          ? "min-h-dvh pt-[calc(var(--header-height)+1.5rem)] pb-10 sm:pt-[calc(var(--header-height)+2rem)] sm:pb-12 lg:pt-[calc(var(--header-height)+2.5rem)] lg:pb-14"
-          : "justify-center pt-[calc(var(--header-height)+1.75rem)] pb-10 sm:pt-[calc(var(--header-height)+2.25rem)] sm:pb-12 lg:min-h-[86dvh] lg:pt-[var(--header-height)] lg:pb-6",
+          ? "min-h-dvh pt-[calc(var(--header-height)+1.5rem)] pb-12 sm:pt-[calc(var(--header-height)+2rem)] sm:pb-14 lg:pt-[calc(var(--header-height)+2.5rem)] lg:pb-16"
+          : "justify-center pt-[calc(var(--header-height)+1.75rem)] pb-14 sm:pt-[calc(var(--header-height)+2.25rem)] sm:pb-16 lg:min-h-[88dvh] lg:pt-[var(--header-height)] lg:pb-12",
         className,
       )}
     >
-      {/* Subtle top-left glow behind text only — right SVG area stays pure #FFFFFF with zero background tint */}
+      {/* Subtle luminous radial highlights across the ice-blue hero backdrop */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "radial-gradient(40% 45% at 14% 20%, rgba(235,245,251,0.6) 0%, rgba(255,255,255,0) 70%)",
+            "radial-gradient(52% 60% at 78% 46%, rgba(42,171,226,0.12) 0%, rgba(235,245,251,0) 72%), radial-gradient(45% 50% at 16% 22%, rgba(255,255,255,0.65) 0%, rgba(235,245,251,0) 70%)",
         }}
       />
 

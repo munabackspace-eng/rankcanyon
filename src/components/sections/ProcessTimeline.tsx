@@ -848,54 +848,132 @@ function TimelineStepRow({
   const cardOpacity = useTransform(smoothReveal, [0.06, 0.95], [0, 1]);
   const cardX = useTransform(smoothReveal, [0.06, 0.95], [cardStartX, 0]);
 
-  const nodeActiveScale = useTransform(smoothReveal, [0.2, 0.7], [0, 1]);
-  const nodeActiveOpacity = useTransform(smoothReveal, [0.2, 0.65], [0, 1]);
+  const originDotScale = useTransform(smoothReveal, [0.25, 0.75], [0, 1]);
+  const arrowHeadOpacity = useTransform(smoothSegment, [0.72, 0.98], [0, 1]);
+  const arrowHeadScale = useTransform(smoothSegment, [0.72, 0.98], [0.7, 1]);
+
+  const curvePath = isEven
+    ? "M 242 14 Q 134 68 62 174"
+    : "M 38 14 Q 146 68 218 174";
+  const startPoint = isEven ? { x: 242, y: 14 } : { x: 38, y: 14 };
+  const endPoint = isEven
+    ? { x: 62, y: 174, angle: 124.2 }
+    : { x: 218, y: 174, angle: 55.8 };
+  const gradId = `process-arrow-grad-${index}`;
 
   return (
     <li
       ref={rowRef}
       className={cn(
-        "relative flex flex-col gap-6 pl-10 sm:pl-14 lg:grid lg:grid-cols-2 lg:items-start lg:gap-24 lg:pl-0 xl:gap-28",
-        !isLast && "pb-16 sm:pb-24 lg:pb-28",
+        "relative flex flex-col gap-6 lg:grid lg:grid-cols-2 lg:items-start lg:gap-24 xl:gap-28",
+        !isLast && "pb-6 sm:pb-8 lg:pb-32",
       )}
     >
-      {/* Vertical timeline spine (left on mobile, dead-center on lg+) */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 flex w-6 justify-center lg:left-1/2 lg:-translate-x-1/2"
-      >
-        {!isLast && (
-          <div className="absolute top-[20px] -bottom-[20px] left-1/2 w-[2px] -translate-x-1/2 bg-navy-950/14 sm:top-[22px] sm:-bottom-[22px]">
-            <m.div
+      {/* Desktop sweeping directional arrow from this step's text to the next step */}
+      {!isLast && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-2 left-1/2 z-10 hidden h-48 w-[17.5rem] -translate-x-1/2 lg:block xl:w-[19.5rem]"
+        >
+          <svg
+            viewBox="0 0 280 192"
+            fill="none"
+            className="size-full overflow-visible"
+          >
+            <defs>
+              <linearGradient
+                id={gradId}
+                x1={startPoint.x}
+                y1={startPoint.y}
+                x2={endPoint.x}
+                y2={endPoint.y}
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0%" stopColor="#2674BC" />
+                <stop offset="100%" stopColor="#2AABE2" />
+              </linearGradient>
+            </defs>
+
+            {/* Subtle dashed guide curve */}
+            <path
+              d={curvePath}
+              stroke="#232020"
+              strokeOpacity="0.16"
+              strokeWidth="2"
+              strokeDasharray="5 5"
+              strokeLinecap="round"
+            />
+
+            {/* Subtle base arrowhead */}
+            <g
+              transform={`translate(${endPoint.x} ${endPoint.y}) rotate(${endPoint.angle})`}
+            >
+              <path
+                d="M -11 -6.5 L 1 0 L -11 6.5"
+                stroke="#232020"
+                strokeOpacity="0.2"
+                strokeWidth="2.25"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </g>
+
+            {/* Scroll-animated active gradient curve */}
+            <m.path
+              d={curvePath}
+              stroke={`url(#${gradId})`}
+              strokeWidth="2.75"
+              strokeLinecap="round"
               style={
                 prefersReducedMotion
                   ? undefined
                   : {
-                      scaleY: smoothSegment,
+                      pathLength: smoothSegment,
                     }
               }
-              className="h-full w-full origin-top bg-gradient-to-b from-navy-950 via-brand-600 to-brand-500"
             />
-          </div>
-        )}
 
-        {/* Step dot node */}
-        <div className="relative z-10 mt-2.5 flex size-5 items-center justify-center rounded-full border-2 border-navy-200 bg-background sm:size-6">
-          <m.span
-            style={
-              prefersReducedMotion
-                ? undefined
-                : {
-                    scale: nodeActiveScale,
-                    opacity: nodeActiveOpacity,
-                  }
-            }
-            className="flex size-full items-center justify-center rounded-full bg-navy-950 ring-4 ring-brand-500/25"
-          >
-            <span className="size-2 rounded-full bg-brand-500" />
-          </m.span>
+            {/* Origin node */}
+            <m.circle
+              cx={startPoint.x}
+              cy={startPoint.y}
+              r="4.5"
+              fill="#FFFFFF"
+              stroke="#2AABE2"
+              strokeWidth="2.5"
+              className="origin-center [transform-box:fill-box]"
+              style={
+                prefersReducedMotion
+                  ? undefined
+                  : {
+                      scale: originDotScale,
+                    }
+              }
+            />
+
+            {/* Active tangent arrowhead */}
+            <g
+              transform={`translate(${endPoint.x} ${endPoint.y}) rotate(${endPoint.angle})`}
+            >
+              <m.path
+                d="M -11 -6.5 L 1 0 L -11 6.5"
+                stroke="#2AABE2"
+                strokeWidth="2.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={
+                  prefersReducedMotion
+                    ? undefined
+                    : {
+                        opacity: arrowHeadOpacity,
+                        scale: arrowHeadScale,
+                      }
+                }
+              />
+            </g>
+          </svg>
         </div>
-      </div>
+      )}
 
       {/* Text column (Reveals from Left on Step 1 & 3; Reveals from Right on Step 2 & 4) */}
       <m.div
@@ -912,11 +990,11 @@ function TimelineStepRow({
           isEven ? "lg:order-2 lg:pl-2" : "lg:order-1 lg:pr-2",
         )}
       >
-        <span className="inline-flex items-center rounded-full border border-navy-950/8 bg-background px-4 py-1.5 font-display text-xs font-bold text-navy-950 shadow-[0_3px_12px_rgba(35,32,32,0.07)] sm:text-sm">
+        <span className="font-display text-sm font-extrabold tracking-wide text-brand-500 sm:text-[15px]">
           Step {item.step}
         </span>
 
-        <h3 className="mt-4 max-w-md text-2xl leading-[1.2] font-extrabold text-navy-950 sm:text-3xl">
+        <h3 className="mt-2 max-w-md text-2xl leading-[1.2] font-extrabold text-navy-950 sm:text-3xl">
           {item.title}
         </h3>
 
@@ -939,6 +1017,28 @@ function TimelineStepRow({
       >
         <StepInteractiveSvg index={index} />
       </m.div>
+
+      {/* Mobile / tablet compact downward arrow between stacked steps */}
+      {!isLast && (
+        <div
+          aria-hidden="true"
+          className="flex justify-center pt-2 lg:hidden"
+        >
+          <svg
+            viewBox="0 0 32 48"
+            fill="none"
+            className="h-11 w-8 text-brand-500"
+          >
+            <path
+              d="M16 4V41M9.5 35L16 42L22.5 35"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      )}
     </li>
   );
 }

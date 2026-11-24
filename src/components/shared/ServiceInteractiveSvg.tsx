@@ -145,14 +145,14 @@ function DualPanelVisual({ config }: { config: DualPanelConfig }) {
   const [activeRight, setActiveRight] = useState<number | null>(null);
 
   return (
-    <div className="relative z-10 flex flex-col gap-2.5 select-none">
-      <div className="grid grid-cols-2 gap-2.5">
+    <div className="relative z-10 flex h-full flex-1 flex-col gap-2.5 select-none">
+      <div className="grid flex-1 grid-cols-2 gap-2.5">
         {/* Left white sub-card */}
-        <div className="flex flex-col rounded-2xl border border-navy-950 bg-background p-3">
+        <div className="flex h-full flex-col rounded-2xl border border-navy-950 bg-background p-3">
           <p className="font-display text-[11px] leading-tight font-extrabold text-navy-950 sm:text-xs">
             {config.leftHeading}
           </p>
-          <ul className="mt-2.5 space-y-1.5">
+          <ul className="mt-2.5 flex flex-1 flex-col justify-between gap-1.5">
             {config.leftItems.map((item) => (
               <li
                 key={item}
@@ -169,11 +169,11 @@ function DualPanelVisual({ config }: { config: DualPanelConfig }) {
         </div>
 
         {/* Right white sub-card */}
-        <div className="flex flex-col rounded-2xl border border-navy-950 bg-background p-3">
+        <div className="flex h-full flex-col rounded-2xl border border-navy-950 bg-background p-3">
           <p className="font-display text-[11px] leading-tight font-extrabold text-navy-950 sm:text-xs">
             {config.rightHeading}
           </p>
-          <ul className="mt-2.5 space-y-1.5">
+          <ul className="mt-2.5 flex flex-1 flex-col justify-between gap-1.5">
             {config.rightItems.map((item, idx) => {
               const isHighlighted = activeRight === idx;
               return (
@@ -220,7 +220,7 @@ function SixGridVisual({ config }: { config: SixGridConfig }) {
   const [selected, setSelected] = useState<number>(0);
 
   return (
-    <div className="relative z-10 grid grid-cols-2 gap-2.5 select-none">
+    <div className="relative z-10 grid h-full flex-1 auto-rows-fr grid-cols-2 gap-2.5 select-none">
       {config.items.map((item, idx) => {
         const isActive = selected === idx;
         return (
@@ -228,7 +228,7 @@ function SixGridVisual({ config }: { config: SixGridConfig }) {
             key={item.title}
             onMouseEnter={() => setSelected(idx)}
             className={cn(
-              "flex items-center gap-2.5 rounded-xl border bg-background p-2.5 transition-all duration-200",
+              "flex h-full items-center gap-2.5 rounded-xl border bg-background p-3 transition-all duration-200",
               isActive ? "border-brand-500 bg-ice/55" : "border-navy-950",
             )}
           >

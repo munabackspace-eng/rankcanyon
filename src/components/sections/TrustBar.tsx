@@ -23,7 +23,7 @@ export function TrustBar({
   return (
     <section
       aria-labelledby="trust-heading"
-      className="bg-background pt-8 pb-2 sm:pt-10 sm:pb-4"
+      className="bg-background pt-14 pb-2 sm:pt-20 sm:pb-4"
     >
       {showBrands ? (
         <div className="relative mb-12 overflow-hidden mask-fade-x py-3 sm:mb-16">

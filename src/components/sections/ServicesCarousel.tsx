@@ -146,7 +146,7 @@ export function ServicesCarousel({
             service.slug === "product-image-creative-design";
 
           const contentBlock = (
-            <div className={cn("flex flex-col", svgFirst && "mt-auto pt-5")}>
+            <div className="flex flex-col">
               <h3 className="font-display text-lg leading-snug font-extrabold tracking-tight text-navy-950 sm:text-[1.15rem] xl:text-[1.25rem]">
                 <Link
                   href={`/services/${service.slug}`}
@@ -178,7 +178,7 @@ export function ServicesCarousel({
           );
 
           const svgBlock = (
-            <div className={cn(!svgFirst && "mt-auto pt-5")}>
+            <div className="flex flex-1 flex-col">
               <ServiceInteractiveSvg slug={service.slug} />
             </div>
           );
@@ -188,7 +188,7 @@ export function ServicesCarousel({
               key={service.slug}
               className="flex w-[84vw] max-w-[22.5rem] shrink-0 snap-start sm:w-[22rem] sm:max-w-none md:w-[23rem] lg:w-[23.75rem] xl:w-[24.75rem]"
             >
-              <article className="group relative flex w-full flex-col rounded-2xl border-2 border-navy-950 bg-surface p-5 shadow-[5px_6px_0_0_#2aabe2] transition-all duration-300 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#ebf5fb] hover:shadow-[7px_8px_0_0_#2aabe2] sm:rounded-[1.35rem] lg:p-6">
+              <article className="group relative flex w-full flex-col gap-5 rounded-2xl border-2 border-navy-950 bg-surface p-5 shadow-[5px_6px_0_0_#2aabe2] transition-all duration-300 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#ebf5fb] hover:shadow-[7px_8px_0_0_#2aabe2] sm:rounded-[1.35rem] lg:p-6">
                 {svgFirst ? (
                   <>
                     {svgBlock}
