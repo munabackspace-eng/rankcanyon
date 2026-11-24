@@ -141,13 +141,22 @@ function ServiceCards({
 
 const DEFAULT_TITLE = "We Do Everything Your Brand Needs to Grow and Succeed";
 
+const boxedToneClasses: Record<SectionTone, string> = {
+  light: "bg-background",
+  surface: "bg-surface",
+  ice: "bg-ice",
+  "fade-down": "bg-fade-down",
+  "fade-up": "bg-fade-up",
+  spotlight: "bg-spotlight",
+};
+
 export function ServicesGrid({
   services = allServices,
   title = DEFAULT_TITLE,
   description = "Growing a brand takes more than individual services. It requires a coordinated strategy across advertising, listings, creative content, and marketplace operations. RankCanyon brings everything together to help sellers improve performance, reach more customers, and achieve profitable growth.",
-  tone = "surface",
   detailed = false,
   boxed = !detailed,
+  tone = boxed ? "ice" : "surface",
   showAllLink = true,
 }: ServicesGridProps) {
   const isDefaultTitle = title === DEFAULT_TITLE;
@@ -172,7 +181,10 @@ export function ServicesGrid({
   return (
     <section
       aria-labelledby="services-heading"
-      className="relative overflow-x-clip bg-background pt-0 pb-0 sm:pt-2"
+      className={cn(
+        "relative overflow-x-clip pt-0 pb-0 sm:pt-2",
+        boxedToneClasses[tone],
+      )}
     >
       {/* Full-bleed parallel 2-line diagonal capability marquee */}
       <div className="relative flex w-full items-center justify-center pt-6 pb-0 sm:pt-8">
