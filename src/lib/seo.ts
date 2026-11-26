@@ -81,7 +81,7 @@ export function organizationJsonLd() {
     description: SITE.description,
     email: CONTACT.email,
     telephone: CONTACT.phone,
-    logo: `${SITE.url}/icon.svg`,
+    logo: `${SITE.url}/favicon.png`,
     address: {
       "@type": "PostalAddress",
       streetAddress: CONTACT.address.street,
