@@ -140,70 +140,40 @@ export function ServicesCarousel({
         ref={scrollerRef}
         className="relative z-30 mt-10 flex snap-x snap-mandatory scroll-pl-5 [scrollbar-width:none] items-stretch gap-5 overflow-x-auto scroll-smooth px-5 pt-2 pb-4 sm:mt-12 sm:scroll-pl-6 sm:px-6 lg:scroll-pl-[max(2rem,calc((100%-90rem)/2+2rem))] lg:px-[max(2rem,calc((100%-90rem)/2+2rem))] [&::-webkit-scrollbar]:hidden"
       >
-        {services.map((service) => {
-          const svgFirst =
-            service.slug === "marketplace-ppc-advertising-management" ||
-            service.slug === "product-image-creative-design";
+        {services.map((service) => (
+          <li
+            key={service.slug}
+            className="flex w-[84vw] max-w-[22.5rem] shrink-0 snap-start sm:w-[22rem] sm:max-w-none md:w-[23rem] lg:w-[23.75rem] xl:w-[24.75rem]"
+          >
+            <article className="group relative flex w-full flex-col justify-between gap-5 rounded-3xl bg-background p-5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_-14px_rgba(0,0,0,0.42)] lg:p-6">
+              <div>
+                <ServiceInteractiveSvg slug={service.slug} />
 
-          const contentBlock = (
-            <div className="flex flex-col">
-              <h3 className="font-display text-lg leading-snug font-extrabold tracking-tight text-navy-950 sm:text-[1.15rem] xl:text-[1.25rem]">
+                <h3 className="mt-5 font-display text-lg leading-snug font-extrabold tracking-tight text-navy-950 sm:text-[1.2rem] xl:text-[1.25rem]">
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="transition-colors hover:text-brand-600 focus-visible:outline-none"
+                  >
+                    {service.title}
+                  </Link>
+                </h3>
+              </div>
+
+              <div>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="transition-colors hover:text-brand-600 focus-visible:outline-none"
+                  className="inline-flex items-center gap-2 rounded-[7px] bg-brand-500 px-4 py-2 font-display text-xs font-extrabold text-white shadow-[0_8px_18px_-5px_rgba(42,171,226,0.55)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-600 hover:shadow-[0_12px_22px_-5px_rgba(38,116,188,0.55)] sm:text-[13px]"
                 >
-                  {service.title}
-                </Link>
-              </h3>
-
-              <p className="mt-2.5 text-xs leading-relaxed text-navy-800/80 sm:text-[13.5px]">
-                {service.summary}
-              </p>
-
-              <div className="mt-4">
-                <Link
-                  href={`/services/${service.slug}`}
-                  className="inline-flex items-center gap-1.5 border-0 bg-transparent p-0 font-display text-xs font-extrabold text-navy-950 transition-colors duration-200 hover:text-brand-600 sm:text-[13px]"
-                >
-                  <span className="underline decoration-navy-950/35 underline-offset-4 transition-colors group-hover:decoration-brand-500">
-                    Learn More
-                  </span>
+                  <span>Learn More</span>
                   <ArrowRight
                     aria-hidden="true"
-                    className="size-3.5 transition-transform duration-200 group-hover:translate-x-1"
+                    className="animate-arrow-nudge size-3.5 stroke-[2.5]"
                   />
                 </Link>
               </div>
-            </div>
-          );
-
-          const svgBlock = (
-            <div className="flex flex-1 flex-col">
-              <ServiceInteractiveSvg slug={service.slug} />
-            </div>
-          );
-
-          return (
-            <li
-              key={service.slug}
-              className="flex w-[84vw] max-w-[22.5rem] shrink-0 snap-start sm:w-[22rem] sm:max-w-none md:w-[23rem] lg:w-[23.75rem] xl:w-[24.75rem]"
-            >
-              <article className="group relative flex w-full flex-col gap-5 rounded-2xl border-2 border-navy-950 bg-surface p-5 shadow-[5px_6px_0_0_#2aabe2] transition-all duration-300 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#ebf5fb] hover:shadow-[7px_8px_0_0_#2aabe2] sm:rounded-[1.35rem] lg:p-6">
-                {svgFirst ? (
-                  <>
-                    {svgBlock}
-                    {contentBlock}
-                  </>
-                ) : (
-                  <>
-                    {contentBlock}
-                    {svgBlock}
-                  </>
-                )}
-              </article>
-            </li>
-          );
-        })}
+            </article>
+          </li>
+        ))}
 
         {/* Trailing spacer so the final card's offset shadow never clips */}
         <li aria-hidden="true" className="w-3 shrink-0 sm:w-6 lg:w-10" />

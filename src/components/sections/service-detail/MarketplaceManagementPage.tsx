@@ -188,16 +188,6 @@ export function MarketplaceManagementPage() {
                   {data.growthStory.titleLead}{" "}
                   <span className="text-brand-500">{data.growthStory.titleAccent}</span>
                 </h2>
-
-                {/* Subtle decorative channel pulse bar */}
-                <div
-                  aria-hidden="true"
-                  className="mt-6 flex items-center gap-2"
-                >
-                  <span className="h-1.5 w-14 rounded-full bg-brand-500" />
-                  <span className="h-1.5 w-5 rounded-full bg-brand-300" />
-                  <span className="h-1.5 w-2.5 rounded-full bg-navy-950/20" />
-                </div>
               </div>
 
               <div className="border-l-2 border-brand-500 pl-6 sm:pl-8 lg:col-span-7 lg:pl-10">
@@ -290,21 +280,15 @@ export function MarketplaceManagementPage() {
             <div className="overflow-hidden rounded-3xl border border-white/10 bg-black px-6 py-10 text-white shadow-[0_24px_60px_-18px_rgba(18,41,64,0.28),inset_0_1px_0_rgba(255,255,255,0.08)] sm:rounded-[2rem] sm:px-10 sm:py-12 lg:px-14 lg:py-14 xl:px-16">
               <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center lg:gap-12">
                 <div className="max-w-2xl">
-                  <p className="font-display text-xs font-extrabold tracking-[0.16em] text-brand-400 uppercase sm:text-[13px]">
-                    {data.consultationBanner.eyebrow}
-                  </p>
                   <h2
                     id="consultation-banner-heading"
-                    className="mt-3 text-2xl leading-[1.12] font-extrabold tracking-tight text-wrap text-white sm:text-4xl lg:text-[2.5rem]"
+                    className="text-2xl leading-[1.12] font-extrabold tracking-tight text-wrap text-white sm:text-4xl lg:text-[2.5rem]"
                   >
                     {data.consultationBanner.titleLead}{" "}
                     <span className="text-brand-400">
                       {data.consultationBanner.titleAccent}
                     </span>
                   </h2>
-                  <p className="mt-4 text-sm leading-relaxed text-white/80 sm:text-base">
-                    {data.consultationBanner.subtext}
-                  </p>
                 </div>
 
                 <div className="w-full shrink-0 sm:w-auto">
@@ -337,9 +321,6 @@ export function MarketplaceManagementPage() {
                 {data.includedSection.titleLead}{" "}
                 <span className="text-brand-500">{data.includedSection.titleAccent}</span>
               </h2>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted sm:text-lg">
-                {data.includedSection.subtext}
-              </p>
             </div>
           </Reveal>
 
@@ -443,8 +424,6 @@ export function MarketplaceManagementPage() {
                         )}
                       </div>
 
-                      <div className="mt-5 h-px w-12 bg-navy-950/18" aria-hidden="true" />
-
                       <h3 className="mt-4 font-display text-xl font-extrabold text-navy-950 sm:text-2xl">
                         {step.title}
                       </h3>
@@ -461,121 +440,10 @@ export function MarketplaceManagementPage() {
         </Container>
       </section>
 
-      {/* 8. Which Marketplaces Do We Manage? — Clean Minimalist Hairline Comparison Table */}
-      <section
-        aria-labelledby="marketplaces-table-heading"
-        className="w-full bg-background py-16 text-foreground sm:py-24"
-      >
-        <Container>
-          <Reveal>
-            <div className="mx-auto max-w-4xl text-center">
-              <h2
-                id="marketplaces-table-heading"
-                className="text-3xl leading-[1.1] font-extrabold tracking-tight text-wrap text-navy-950 sm:text-5xl lg:text-[3.25rem]"
-              >
-                {data.marketplacesTableSection.titleLead}{" "}
-                <span className="text-brand-500">
-                  {data.marketplacesTableSection.titleAccent}
-                </span>
-              </h2>
-              <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-muted sm:text-lg">
-                {data.marketplacesTableSection.subtext}
-              </p>
-            </div>
-          </Reveal>
-
-          {/* Desktop & Tablet Minimalist Table */}
-          <Reveal delay={0.06} className="mt-12 hidden md:block">
-            <div className="overflow-hidden rounded-3xl border border-navy-950/12 bg-background shadow-[0_20px_50px_-20px_rgba(18,41,64,0.12)]">
-              <table className="w-full border-collapse text-left">
-                <thead>
-                  <tr className="bg-navy-950 text-white">
-                    <th
-                      scope="col"
-                      className="px-6 py-4.5 font-display text-sm font-extrabold tracking-wide lg:px-8"
-                    >
-                      {data.marketplacesTableSection.columns.marketplace}
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-4.5 font-display text-sm font-extrabold tracking-wide lg:px-8"
-                    >
-                      {data.marketplacesTableSection.columns.strengths}
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-4.5 font-display text-sm font-extrabold tracking-wide lg:px-8"
-                    >
-                      {data.marketplacesTableSection.columns.managed}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-navy-950/10">
-                  {data.marketplacesTableSection.rows.map((row) => (
-                    <tr
-                      key={row.marketplace}
-                      className="transition-colors hover:bg-ice/55"
-                    >
-                      <th
-                        scope="row"
-                        className="px-6 py-4.5 font-display text-base font-extrabold whitespace-nowrap text-navy-950 lg:px-8"
-                      >
-                        <span className="inline-flex items-center gap-2.5">
-                          <span
-                            aria-hidden="true"
-                            className="size-2 rounded-full bg-brand-500"
-                          />
-                          {row.marketplace}
-                        </span>
-                      </th>
-                      <td className="px-6 py-4.5 text-sm leading-relaxed text-navy-800 sm:text-[15px] lg:px-8">
-                        {row.strengths}
-                      </td>
-                      <td className="px-6 py-4.5 text-sm leading-relaxed text-navy-800 sm:text-[15px] lg:px-8">
-                        {row.managed}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Reveal>
-
-          {/* Mobile Clean Divided List (No Heavy Card Borders) */}
-          <ul className="mt-10 divide-y divide-navy-950/12 border-y border-navy-950/12 md:hidden">
-            {data.marketplacesTableSection.rows.map((row) => (
-              <li key={row.marketplace} className="py-5">
-                <h3 className="flex items-center gap-2 font-display text-lg font-extrabold text-navy-950">
-                  <span
-                    aria-hidden="true"
-                    className="size-2 rounded-full bg-brand-500"
-                  />
-                  {row.marketplace}
-                </h3>
-                <dl className="mt-3 grid gap-2.5 pl-4 text-sm">
-                  <div>
-                    <dt className="font-display text-[11px] font-bold tracking-wider text-brand-600 uppercase">
-                      {data.marketplacesTableSection.columns.strengths}
-                    </dt>
-                    <dd className="mt-0.5 text-navy-800">{row.strengths}</dd>
-                  </div>
-                  <div>
-                    <dt className="font-display text-[11px] font-bold tracking-wider text-brand-600 uppercase">
-                      {data.marketplacesTableSection.columns.managed}
-                    </dt>
-                    <dd className="mt-0.5 text-navy-800">{row.managed}</dd>
-                  </div>
-                </dl>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* 9. Pricing Plans + Full-Width Enterprise Strip — Refined Soft-Elevated Tier Columns */}
+      {/* 8. Pricing Plans + Full-Width Enterprise Strip — Refined Soft-Elevated Tier Columns */}
       <section
         aria-labelledby="service-pricing-heading"
-        className="w-full bg-surface py-16 text-foreground sm:py-24"
+        className="w-full bg-background py-16 text-foreground sm:py-24"
       >
         <Container>
           <Reveal>
@@ -587,9 +455,6 @@ export function MarketplaceManagementPage() {
                 {data.pricingSection.titleLead}{" "}
                 <span className="text-brand-500">{data.pricingSection.titleAccent}</span>
               </h2>
-              <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-muted sm:text-lg">
-                {data.pricingSection.subtext}
-              </p>
             </div>
           </Reveal>
 
@@ -699,11 +564,6 @@ export function MarketplaceManagementPage() {
               </div>
             </div>
           </Reveal>
-
-          {/* Small print under the section */}
-          <p className="mx-auto mt-6 max-w-4xl text-center text-xs leading-relaxed text-navy-600 sm:text-sm">
-            {data.pricingSection.smallPrint}
-          </p>
         </Container>
       </section>
 
@@ -721,10 +581,8 @@ export function MarketplaceManagementPage() {
                   id="why-choose-heading"
                   className="text-3xl leading-[1.1] font-extrabold tracking-tight text-wrap text-navy-950 sm:text-4xl lg:text-[2.85rem]"
                 >
-                  {data.whyChooseSection.titleLead}{" "}
-                  <span className="text-brand-500">
-                    {data.whyChooseSection.titleAccent}
-                  </span>
+                  Why E-commerce Brands Choose{" "}
+                  <span className="text-brand-500">Rank</span>Canyon
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
                   {data.whyChooseSection.subtext}

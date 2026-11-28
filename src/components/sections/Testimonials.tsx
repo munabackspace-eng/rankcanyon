@@ -32,7 +32,8 @@ export function Testimonials({ testimonials = allTestimonials }: TestimonialsPro
                 className="text-3xl leading-[1.12] font-extrabold tracking-tight text-navy-950 sm:text-4xl lg:text-[2.35rem] xl:text-[2.5rem]"
               >
                 E-commerce Leaders Trust{" "}
-                <span className="text-brand-500">RankCanyon to Drive Growth</span>
+                <span className="text-brand-500">Rank</span>Canyon{" "}
+                <span className="text-brand-500">to Drive Growth</span>
               </h2>
             </div>
 

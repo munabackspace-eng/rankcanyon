@@ -3,6 +3,7 @@ import {
   Image as ImageIcon,
   LayoutGrid,
   Megaphone,
+  Rocket,
   Search,
   Store,
 } from "lucide-react";
@@ -186,6 +187,61 @@ export const services: Service[] = [
         question: "Do you localize listings for international marketplaces?",
         answer:
           "Yes. Native marketplace copywriters localize keyword research and idioms across North America, UK, EU and APAC.",
+      },
+    ],
+  },
+  {
+    slug: "product-launch-growth",
+    title: "Product Launch & Growth",
+    shortTitle: "Product Launch & Growth",
+    icon: Rocket,
+    summary:
+      "Your product's first 90 days decide whether it climbs or gets buried. RankCanyon's Product Launch Services take you from first idea to steady sales across Amazon, Walmart, Shopify and TikTok Shop.",
+    metaDescription:
+      "End-to-end marketplace product launch services from first idea to day 90: product research, sourcing, compliance, listings, launch PPC, Amazon Vine reviews and 90-day tracking.",
+    overview: [
+      "An end-to-end product launch service takes a product from idea to steady sales across Amazon, Walmart, Shopify and TikTok Shop.",
+      "With RankCanyon, one team plans and runs research, listings, launch PPC, Vine reviews and 90-day post-launch optimization.",
+    ],
+    features: [
+      {
+        title: "Market & competitor research",
+        description:
+          "Demand validation, keyword mapping and post-fee profit modeling before launch day.",
+      },
+      {
+        title: "Conversion-ready listings",
+        description:
+          "Keyword-rich copy, gallery visuals and A+ Content built to convert early traffic.",
+      },
+      {
+        title: "Targeted launch PPC & Vine",
+        description:
+          "Focused ranking campaigns paired with compliant Amazon Vine early review enrollment.",
+      },
+      {
+        title: "90-day momentum tracking",
+        description:
+          "Weekly sales, ranking and conversion optimization from launch day through day 90.",
+      },
+    ],
+    outcomes: [
+      { value: "90 days", label: "End-to-end post-launch tracking" },
+      { value: "50+", label: "High-intent launch keywords mapped" },
+      { value: "100%", label: "Marketplace policy compliant" },
+    ],
+    deliverables: [
+      "Market, competitor & margin validation",
+      "Full SEO listing, image stack & A+ Content",
+      "Variation, catalog & compliance setup",
+      "Launch PPC campaigns & Amazon Vine enrollment",
+      "Weekly tracking & 90-day scale roadmap",
+    ],
+    faqs: [
+      {
+        question: "Do you stay with us after launch day?",
+        answer:
+          "Yes. For 90 days after launch, we track sales, rankings and conversion every week and adjust pricing, listings and ads based on live data.",
       },
     ],
   },

@@ -90,12 +90,6 @@ export function BlogInsightsSection({
             Grow Your{" "}
             <span className="whitespace-nowrap text-brand-500">E-Commerce Brand</span>
           </h2>
-
-          <p className="mx-auto mt-4 max-w-[50rem] text-base leading-relaxed text-pretty text-muted sm:text-lg">
-            Explore expert insights, practical guides, and marketplace strategies to help
-            you improve performance, make smarter decisions, and uncover new growth
-            opportunities.
-          </p>
         </div>
       </Container>
 

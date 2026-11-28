@@ -26,6 +26,7 @@ const capabilityStripPrimary = [
   "Marketplace Account Management",
   "Marketplace PPC & Advertising Management",
   "Organic Ranking & Sales Growth",
+  "Product Launch & Growth",
   "Product Image & Creative Design",
   "A+ Content & Brand Store Design",
   "Product Video Production",
@@ -51,90 +52,60 @@ function ServiceCards({
 }) {
   return (
     <ul className="mt-14 grid gap-7 lg:grid-cols-2">
-      {services.map((service, i) => {
-        const svgFirst =
-          service.slug === "marketplace-ppc-advertising-management" ||
-          service.slug === "product-image-creative-design";
+      {services.map((service, i) => (
+        <li key={service.slug} className="flex">
+          <Reveal delay={(i % 2) * 0.08} className="flex w-full">
+            <article
+              className={cn(
+                "group relative flex w-full flex-col justify-between gap-6 rounded-3xl border border-navy-950/10 bg-background p-6 transition-all duration-300 hover:-translate-y-1 sm:p-8",
+                onDark
+                  ? "shadow-[0_20px_50px_-15px_rgba(0,0,0,0.3)] hover:shadow-[0_28px_60px_-14px_rgba(0,0,0,0.42)]"
+                  : "shadow-[0_16px_42px_-16px_rgba(18,41,64,0.12)] hover:shadow-[0_24px_52px_-16px_rgba(18,41,64,0.18)]",
+              )}
+            >
+              <div>
+                <ServiceInteractiveSvg slug={service.slug} />
 
-        const contentBlock = (
-          <div className="flex flex-col">
-            <h3 className="font-display text-2xl leading-snug font-extrabold tracking-tight text-navy-950 sm:text-[1.65rem]">
-              <Link
-                href={`/services/${service.slug}`}
-                className="transition-colors hover:text-brand-600 focus-visible:outline-none"
-              >
-                {service.title}
-              </Link>
-            </h3>
+                <h3 className="mt-6 font-display text-2xl leading-snug font-extrabold tracking-tight text-navy-950 sm:text-[1.65rem]">
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="transition-colors hover:text-brand-600 focus-visible:outline-none"
+                  >
+                    {service.title}
+                  </Link>
+                </h3>
 
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-navy-800/80 sm:text-base">
-              {service.summary}
-            </p>
-
-            {detailed && (
-              <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-                {service.features.map((feature) => (
-                  <li key={feature.title} className="flex gap-2 text-sm text-navy-800">
-                    <Check
-                      aria-hidden="true"
-                      className="mt-0.5 size-4 shrink-0 text-brand-600"
-                    />
-                    {feature.title}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            <div className="mt-5">
-              <Link
-                href={`/services/${service.slug}`}
-                className="inline-flex items-center gap-2 border-0 bg-transparent p-0 font-display text-sm font-extrabold text-navy-950 transition-colors duration-200 hover:text-brand-600"
-              >
-                <span className="underline decoration-navy-950/35 underline-offset-4 transition-colors group-hover:decoration-brand-500">
-                  Learn More
-                </span>
-                <ArrowRight
-                  aria-hidden="true"
-                  className="size-4 transition-transform duration-200 group-hover:translate-x-1"
-                />
-              </Link>
-            </div>
-          </div>
-        );
-
-        const svgBlock = (
-          <div className="flex flex-1 flex-col">
-            <ServiceInteractiveSvg slug={service.slug} />
-          </div>
-        );
-
-        return (
-          <li key={service.slug} className="flex">
-            <Reveal delay={(i % 2) * 0.08} className="flex w-full">
-              <article
-                className={cn(
-                  "group relative flex w-full flex-col gap-7 rounded-[1.75rem] border-2 border-navy-950 bg-surface p-6 transition-all duration-300 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#ebf5fb] sm:p-8 lg:p-9",
-                  onDark
-                    ? "shadow-[6px_7px_0_0_#2aabe2] hover:shadow-[8px_9px_0_0_#2aabe2]"
-                    : "shadow-[6px_7px_0_0_#232020] hover:shadow-[8px_9px_0_0_#2aabe2]",
+                {detailed && (
+                  <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                    {service.features.map((feature) => (
+                      <li key={feature.title} className="flex gap-2 text-sm text-navy-800">
+                        <Check
+                          aria-hidden="true"
+                          className="mt-0.5 size-4 shrink-0 text-brand-600"
+                        />
+                        {feature.title}
+                      </li>
+                    ))}
+                  </ul>
                 )}
-              >
-                {svgFirst ? (
-                  <>
-                    {svgBlock}
-                    {contentBlock}
-                  </>
-                ) : (
-                  <>
-                    {contentBlock}
-                    {svgBlock}
-                  </>
-                )}
-              </article>
-            </Reveal>
-          </li>
-        );
-      })}
+              </div>
+
+              <div>
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="inline-flex items-center gap-2 rounded-[7px] bg-brand-500 px-5 py-2.5 font-display text-sm font-extrabold text-white shadow-[0_8px_18px_-5px_rgba(42,171,226,0.55)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-600 hover:shadow-[0_12px_22px_-5px_rgba(38,116,188,0.55)]"
+                >
+                  <span>Learn More</span>
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="animate-arrow-nudge size-4 stroke-[2.5]"
+                  />
+                </Link>
+              </div>
+            </article>
+          </Reveal>
+        </li>
+      ))}
     </ul>
   );
 }

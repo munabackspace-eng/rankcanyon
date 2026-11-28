@@ -5,6 +5,9 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { MarketplaceManagementPage } from "@/components/sections/service-detail/MarketplaceManagementPage";
+import { MarketplacePpcPage } from "@/components/sections/service-detail/MarketplacePpcPage";
+import { OrganicRankingPage } from "@/components/sections/service-detail/OrganicRankingPage";
+import { ProductLaunchPage } from "@/components/sections/service-detail/ProductLaunchPage";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/shared/Reveal";
@@ -14,9 +17,34 @@ import { IconBadge } from "@/components/ui/IconBadge";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { marketplaceManagementPageData } from "@/data/marketplace-management";
+import { marketplacePpcPageData } from "@/data/marketplace-ppc";
+import { organicRankingPageData } from "@/data/organic-ranking";
+import { productLaunchPageData } from "@/data/product-launch";
 import { getServiceBySlug, services } from "@/data/services";
 import { PRIMARY_CTA, SITE } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
+
+const CUSTOM_SERVICE_SEO: Record<
+  string,
+  { seoTitle: string; seoDescription: string }
+> = {
+  [marketplaceManagementPageData.slug]: {
+    seoTitle: marketplaceManagementPageData.seoTitle,
+    seoDescription: marketplaceManagementPageData.seoDescription,
+  },
+  [marketplacePpcPageData.slug]: {
+    seoTitle: marketplacePpcPageData.seoTitle,
+    seoDescription: marketplacePpcPageData.seoDescription,
+  },
+  [organicRankingPageData.slug]: {
+    seoTitle: organicRankingPageData.seoTitle,
+    seoDescription: organicRankingPageData.seoDescription,
+  },
+  [productLaunchPageData.slug]: {
+    seoTitle: productLaunchPageData.seoTitle,
+    seoDescription: productLaunchPageData.seoDescription,
+  },
+};
 
 /** Prerender every service page at build time. */
 export function generateStaticParams() {
@@ -30,10 +58,11 @@ export async function generateMetadata({
   const service = getServiceBySlug(slug);
   if (!service) return { title: "Service not found" };
 
-  if (slug === marketplaceManagementPageData.slug) {
+  const customSeo = CUSTOM_SERVICE_SEO[slug];
+  if (customSeo) {
     return buildMetadata({
-      title: marketplaceManagementPageData.seoTitle,
-      description: marketplaceManagementPageData.seoDescription,
+      title: customSeo.seoTitle,
+      description: customSeo.seoDescription,
       path: `/services/${service.slug}`,
     });
   }
@@ -50,27 +79,50 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
-  const isMarketplaceManagement = slug === marketplaceManagementPageData.slug;
+  const customSeo = CUSTOM_SERVICE_SEO[slug];
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: isMarketplaceManagement
-      ? marketplaceManagementPageData.seoTitle
-      : service.title,
-    description: isMarketplaceManagement
-      ? marketplaceManagementPageData.seoDescription
-      : service.metaDescription,
+    name: customSeo ? customSeo.seoTitle : service.title,
+    description: customSeo ? customSeo.seoDescription : service.metaDescription,
     serviceType: service.shortTitle,
     url: `${SITE.url}/services/${service.slug}`,
     provider: { "@id": `${SITE.url}/#organization` },
     areaServed: "Worldwide",
   };
 
-  if (isMarketplaceManagement) {
+  if (slug === marketplaceManagementPageData.slug) {
     return (
       <>
         <MarketplaceManagementPage />
+        <JsonLd data={serviceJsonLd} />
+      </>
+    );
+  }
+
+  if (slug === marketplacePpcPageData.slug) {
+    return (
+      <>
+        <MarketplacePpcPage />
+        <JsonLd data={serviceJsonLd} />
+      </>
+    );
+  }
+
+  if (slug === organicRankingPageData.slug) {
+    return (
+      <>
+        <OrganicRankingPage />
+        <JsonLd data={serviceJsonLd} />
+      </>
+    );
+  }
+
+  if (slug === productLaunchPageData.slug) {
+    return (
+      <>
+        <ProductLaunchPage />
         <JsonLd data={serviceJsonLd} />
       </>
     );

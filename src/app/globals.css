@@ -261,6 +261,20 @@
   }
 }
 
+@keyframes arrow-nudge-x {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.animate-arrow-nudge {
+  animation: arrow-nudge-x 1.35s ease-in-out infinite;
+}
+
 .animate-hero-wave {
   animation: hero-card-wave 3.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
@@ -309,6 +323,7 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-grow-up,
+  .animate-arrow-nudge,
   .animate-hero-wave,
   .animate-svg-wave,
   .animate-svg-bob,

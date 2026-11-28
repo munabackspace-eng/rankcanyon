@@ -118,16 +118,11 @@ function NavDropdown({ item, active }: { item: NavItem; active: boolean }) {
                     <Link
                       href={child.href}
                       onClick={() => setOpen(false)}
-                      className="group block rounded-2xl p-3.5 transition-colors hover:bg-white/8 focus-visible:bg-white/8"
+                      className="group block rounded-2xl px-4 py-3 transition-colors hover:bg-white/8 focus-visible:bg-white/8"
                     >
                       <span className="block font-display text-sm font-bold text-white transition-colors group-hover:text-brand-400">
                         {child.label}
                       </span>
-                      {child.description && (
-                        <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-white/65">
-                          {child.description}
-                        </span>
-                      )}
                     </Link>
                   </li>
                 ))}

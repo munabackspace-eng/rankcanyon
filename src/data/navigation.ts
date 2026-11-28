@@ -20,33 +20,10 @@ export const mainNav: NavItem[] = [
 export const footerNav: FooterGroup[] = [
   {
     title: "Services",
-    links: [
-      {
-        label: "Marketplace Account Management",
-        href: "/services/marketplace-account-management",
-      },
-      {
-        label: "Marketplace PPC & Advertising Management",
-        href: "/services/marketplace-ppc-advertising-management",
-      },
-      { label: "DSP Management", href: "#dsp-management" },
-      {
-        label: "Organic Ranking & Sales Growth",
-        href: "/services/organic-ranking-sales-growth",
-      },
-      {
-        label: "Product Creative",
-        href: "/services/product-image-creative-design",
-      },
-      {
-        label: "A+ & Brand Stores",
-        href: "/services/a-plus-content-brand-store",
-      },
-      {
-        label: "Video Production",
-        href: "/services/product-video-production",
-      },
-    ],
+    links: services.map((service) => ({
+      label: service.title,
+      href: `/services/${service.slug}`,
+    })),
   },
   {
     title: "Company",
@@ -80,7 +57,7 @@ export const footerNav: FooterGroup[] = [
       { label: "Walmart Marketplace", href: "#walmart-marketplace" },
       { label: "TikTok Shop", href: "#tiktok-shop" },
       { label: "Target Plus", href: "#target-plus" },
-      { label: "Brand Launch", href: "#brand-launch" },
+      { label: "Brand Launch", href: "/services/product-launch-growth" },
       { label: "Global Expansion", href: "#global-expansion" },
     ],
   },
