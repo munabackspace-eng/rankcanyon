@@ -6,7 +6,7 @@ export const mainNav: NavItem[] = [
     label: "Services",
     href: "/services",
     children: services.map((service) => ({
-      label: service.shortTitle,
+      label: service.title,
       href: `/services/${service.slug}`,
       description: service.summary,
     })),
@@ -22,17 +22,17 @@ export const footerNav: FooterGroup[] = [
     title: "Services",
     links: [
       {
-        label: "Account Management",
-        href: "/services/amazon-marketplace-management",
+        label: "Marketplace Account Management",
+        href: "/services/marketplace-account-management",
       },
       {
-        label: "Amazon PPC",
-        href: "/services/marketplace-ppc-management",
+        label: "Marketplace PPC & Advertising Management",
+        href: "/services/marketplace-ppc-advertising-management",
       },
       { label: "DSP Management", href: "#dsp-management" },
       {
-        label: "Listing & SEO",
-        href: "/services/listing-optimization-seo",
+        label: "Organic Ranking & Sales Growth",
+        href: "/services/organic-ranking-sales-growth",
       },
       {
         label: "Product Creative",

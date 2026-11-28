@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import type { Faq } from "@/types";
 
 type FaqSectionProps = {
-  faqs: Faq[];
+  faqs: readonly Faq[];
   title?: string;
   headingLead?: string;
   headingAccent?: string;
@@ -19,6 +19,7 @@ type FaqSectionProps = {
   ctaHref?: string;
   imageSrc?: string;
   imageAlt?: string;
+  initialVisibleCount?: number;
   tone?: SectionTone;
   /** Emit FAQPage structured data. Only one FAQPage per URL. */
   withSchema?: boolean;
@@ -52,10 +53,12 @@ export function FaqSection({
   ctaHref = PRIMARY_CTA.href,
   imageSrc = DEFAULT_IMAGE_SRC,
   imageAlt = DEFAULT_IMAGE_ALT,
+  initialVisibleCount = 5,
   tone = "ice",
   withSchema = true,
 }: FaqSectionProps) {
   const isDefaultHeading = !headingLead && !headingAccent && title === DEFAULT_TITLE;
+  const hasExpandableList = faqs.length > initialVisibleCount;
 
   const resolvedHeading = isDefaultHeading
     ? {
@@ -75,13 +78,18 @@ export function FaqSection({
       <Container>
         <div
           className={cn(
-            "relative overflow-hidden rounded-3xl border border-white/10 bg-black px-6 py-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:rounded-[2rem] sm:px-12 sm:py-16 lg:px-16 lg:py-20 xl:px-20",
+            "relative overflow-x-clip rounded-3xl border border-white/10 bg-black px-6 py-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] sm:rounded-[2rem] sm:px-12 sm:py-16 lg:px-16 lg:py-20 xl:px-20",
             tone === "surface" && "bg-black",
           )}
         >
           <div className="relative z-10 grid items-stretch gap-10 lg:grid-cols-[minmax(0,1fr)_2px_minmax(0,1.35fr)] lg:gap-12 xl:gap-16">
             {/* Left column: Top editorial content + bottom showcase image */}
-            <div className="flex flex-col gap-7">
+            <div
+              className={cn(
+                "flex flex-col gap-7",
+                hasExpandableList && "lg:sticky lg:top-28 lg:self-start",
+              )}
+            >
               <div className="w-full">
                 <h2
                   id="faq-heading"
@@ -105,7 +113,14 @@ export function FaqSection({
                 </div>
               </div>
 
-              <div className="relative min-h-[14rem] w-full flex-1 overflow-hidden rounded-2xl border border-white/12 bg-white/5 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.65)] sm:min-h-[16rem] lg:min-h-[13rem]">
+              <div
+                className={cn(
+                  "relative w-full overflow-hidden rounded-2xl border border-white/12 bg-white/5 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.65)]",
+                  hasExpandableList
+                    ? "aspect-[16/10]"
+                    : "min-h-[14rem] flex-1 sm:min-h-[16rem] lg:min-h-[13rem]",
+                )}
+              >
                 <Image
                   src={imageSrc}
                   alt={imageAlt}
@@ -123,8 +138,8 @@ export function FaqSection({
             />
 
             {/* Right column: Clean horizontal-divided FAQ accordion */}
-            <div className="flex flex-col justify-center">
-              <FaqAccordion faqs={faqs} />
+            <div className="flex flex-col justify-start">
+              <FaqAccordion faqs={faqs} initialVisibleCount={initialVisibleCount} />
             </div>
           </div>
         </div>

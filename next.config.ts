@@ -31,6 +31,25 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  async redirects() {
+    return [
+      {
+        source: "/services/amazon-marketplace-management",
+        destination: "/services/marketplace-account-management",
+        permanent: true,
+      },
+      {
+        source: "/services/marketplace-ppc-management",
+        destination: "/services/marketplace-ppc-advertising-management",
+        permanent: true,
+      },
+      {
+        source: "/services/listing-optimization-seo",
+        destination: "/services/organic-ranking-sales-growth",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { MarketplaceManagementPage } from "@/components/sections/service-detail/MarketplaceManagementPage";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/shared/Reveal";
@@ -12,6 +13,7 @@ import { Card } from "@/components/ui/Card";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { marketplaceManagementPageData } from "@/data/marketplace-management";
 import { getServiceBySlug, services } from "@/data/services";
 import { PRIMARY_CTA, SITE } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
@@ -28,6 +30,14 @@ export async function generateMetadata({
   const service = getServiceBySlug(slug);
   if (!service) return { title: "Service not found" };
 
+  if (slug === marketplaceManagementPageData.slug) {
+    return buildMetadata({
+      title: marketplaceManagementPageData.seoTitle,
+      description: marketplaceManagementPageData.seoDescription,
+      path: `/services/${service.slug}`,
+    });
+  }
+
   return buildMetadata({
     title: service.title,
     description: service.metaDescription,
@@ -40,18 +50,33 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
-  const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const isMarketplaceManagement = slug === marketplaceManagementPageData.slug;
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: service.title,
-    description: service.metaDescription,
+    name: isMarketplaceManagement
+      ? marketplaceManagementPageData.seoTitle
+      : service.title,
+    description: isMarketplaceManagement
+      ? marketplaceManagementPageData.seoDescription
+      : service.metaDescription,
     serviceType: service.shortTitle,
     url: `${SITE.url}/services/${service.slug}`,
     provider: { "@id": `${SITE.url}/#organization` },
     areaServed: "Worldwide",
   };
+
+  if (isMarketplaceManagement) {
+    return (
+      <>
+        <MarketplaceManagementPage />
+        <JsonLd data={serviceJsonLd} />
+      </>
+    );
+  }
+
+  const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
 
   return (
     <>

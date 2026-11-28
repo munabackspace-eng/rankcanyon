@@ -29,7 +29,7 @@ type SixGridConfig = {
 type ServiceSvgConfig = DualPanelConfig | SixGridConfig;
 
 const CONFIGS: Record<string, ServiceSvgConfig> = {
-  "amazon-marketplace-management": {
+  "marketplace-account-management": {
     kind: "dual",
     leftHeading: "What We Manage",
     leftItems: ["Amazon", "eBay", "Walmart", "Etsy", "Target", "Others"],
@@ -44,7 +44,7 @@ const CONFIGS: Record<string, ServiceSvgConfig> = {
     ],
     pillLabel: "Full-Service Management",
   },
-  "marketplace-ppc-management": {
+  "marketplace-ppc-advertising-management": {
     kind: "grid",
     items: [
       { title: "Sponsored Ads", icon: "chart" },
@@ -55,7 +55,7 @@ const CONFIGS: Record<string, ServiceSvgConfig> = {
       { title: "Bid & Budget Optimization", icon: "spark" },
     ],
   },
-  "listing-optimization-seo": {
+  "organic-ranking-sales-growth": {
     kind: "dual",
     leftHeading: "What We Optimize",
     leftItems: [
@@ -132,7 +132,7 @@ const CONFIGS: Record<string, ServiceSvgConfig> = {
 };
 
 export function ServiceInteractiveSvg({ slug }: { slug: string }) {
-  const config = CONFIGS[slug] ?? CONFIGS["amazon-marketplace-management"];
+  const config = CONFIGS[slug] ?? CONFIGS["marketplace-account-management"];
 
   if (config.kind === "dual") {
     return <DualPanelVisual config={config} />;

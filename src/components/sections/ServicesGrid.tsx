@@ -23,9 +23,9 @@ type ServicesGridProps = {
 };
 
 const capabilityStripPrimary = [
-  "Amazon & Marketplace Management",
-  "Marketplace PPC Management",
-  "Listing Optimization & SEO",
+  "Marketplace Account Management",
+  "Marketplace PPC & Advertising Management",
+  "Organic Ranking & Sales Growth",
   "Product Image & Creative Design",
   "A+ Content & Brand Store Design",
   "Product Video Production",
@@ -53,7 +53,7 @@ function ServiceCards({
     <ul className="mt-14 grid gap-7 lg:grid-cols-2">
       {services.map((service, i) => {
         const svgFirst =
-          service.slug === "marketplace-ppc-management" ||
+          service.slug === "marketplace-ppc-advertising-management" ||
           service.slug === "product-image-creative-design";
 
         const contentBlock = (

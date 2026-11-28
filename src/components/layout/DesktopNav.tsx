@@ -109,7 +109,7 @@ function NavDropdown({ item, active }: { item: NavItem; active: boolean }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute top-full left-0 z-50 w-[38rem] pt-4"
+            className="absolute top-full left-0 z-50 w-[42rem] pt-4"
           >
             <div className="overflow-hidden rounded-3xl border border-white/12 bg-[#0d0d0f]/88 text-white shadow-[0_28px_70px_-14px_rgba(0,0,0,0.65)] backdrop-blur-xl backdrop-saturate-150">
               <ul className="grid grid-cols-2 gap-1.5 p-3.5">

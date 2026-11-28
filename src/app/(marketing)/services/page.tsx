@@ -11,7 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Amazon & Marketplace Services: Management, PPC, SEO, Creative & Video",
   description:
-    "Explore RankCanyon's full-funnel services: Amazon & Marketplace Management, Marketplace PPC Management, Listing Optimization & SEO, Product Creative, A+ Content & Brand Stores, and Product Video Production.",
+    "Explore RankCanyon's full-funnel services: Marketplace Account Management, Marketplace PPC & Advertising Management, Organic Ranking & Sales Growth, Product Image & Creative Design, A+ Content & Brand Store Design, and Product Video Production.",
   path: "/services",
 });
 

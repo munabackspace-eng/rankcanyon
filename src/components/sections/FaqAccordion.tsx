@@ -1,38 +1,54 @@
 "use client";
 
-import { Plus } from "lucide-react";
+import { ChevronDown, Plus } from "lucide-react";
 import { useId, useState } from "react";
 import type { Faq } from "@/types";
 import { cn } from "@/lib/utils";
 
 type FaqAccordionProps = {
-  faqs: Faq[];
+  faqs: readonly Faq[];
+  initialVisibleCount?: number;
 };
 
-export function FaqAccordion({ faqs }: FaqAccordionProps) {
+export function FaqAccordion({ faqs, initialVisibleCount = 5 }: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
   const baseId = useId();
+
+  const hasMore = faqs.length > initialVisibleCount;
+  const visibleFaqs = hasMore && !showAll ? faqs.slice(0, initialVisibleCount) : faqs;
 
   const toggle = (idx: number) => {
     setOpenIndex((prev) => (prev === idx ? null : idx));
   };
 
-  return (
-    <div className="divide-y divide-white/15">
-      {faqs.map((faq, idx) => {
-        const isOpen = openIndex === idx;
-        const panelId = `${baseId}-panel-${idx}`;
-        const buttonId = `${baseId}-button-${idx}`;
+  const toggleShowAll = () => {
+    setShowAll((prev) => {
+      const next = !prev;
+      if (!next && openIndex !== null && openIndex >= initialVisibleCount) {
+        setOpenIndex(null);
+      }
+      return next;
+    });
+  };
 
-        return (
-          <div
-            key={faq.question}
-            className={cn(
-              "group",
-              idx === 0 ? "pt-0 pb-6 sm:pb-7" : "py-6 sm:py-7",
-              idx === faqs.length - 1 && "pb-0 sm:pb-0",
-            )}
-          >
+  return (
+    <div>
+      <div className="divide-y divide-white/15">
+        {visibleFaqs.map((faq, idx) => {
+          const isOpen = openIndex === idx;
+          const panelId = `${baseId}-panel-${idx}`;
+          const buttonId = `${baseId}-button-${idx}`;
+
+          return (
+            <div
+              key={faq.question}
+              className={cn(
+                "group",
+                idx === 0 ? "pt-0 pb-6 sm:pb-7" : "py-6 sm:py-7",
+                !hasMore && idx === visibleFaqs.length - 1 && "pb-0 sm:pb-0",
+              )}
+            >
             <h3>
               <button
                 id={buttonId}
@@ -91,6 +107,27 @@ export function FaqAccordion({ faqs }: FaqAccordionProps) {
           </div>
         );
       })}
+      </div>
+
+      {hasMore && (
+        <div className="border-t border-white/15 pt-6">
+          <button
+            type="button"
+            aria-expanded={showAll}
+            onClick={toggleShowAll}
+            className="inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-[7px] bg-brand-500 px-6 font-display text-[13.5px] font-bold text-white shadow-[0_10px_24px_-6px_rgba(42,171,226,0.5)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1f98cd] hover:shadow-[0_14px_28px_-6px_rgba(42,171,226,0.6)] active:translate-y-px"
+          >
+            <span>{showAll ? "Show Less" : "Show More"}</span>
+            <ChevronDown
+              aria-hidden="true"
+              className={cn(
+                "size-4 transition-transform duration-200",
+                showAll && "rotate-180",
+              )}
+            />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

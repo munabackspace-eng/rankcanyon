@@ -10,9 +10,9 @@ import type { Service } from "@/types";
 
 export const services: Service[] = [
   {
-    slug: "amazon-marketplace-management",
-    title: "Amazon & Marketplace Management",
-    shortTitle: "Marketplace Management",
+    slug: "marketplace-account-management",
+    title: "Marketplace Account Management",
+    shortTitle: "Marketplace Account Management",
     icon: LayoutGrid,
     summary:
       "End-to-end marketplace operations across Amazon, eBay, Walmart, Etsy, Target, and other leading platforms. We manage listings, catalogs, inventory, orders, and account performance to support your multi-channel growth.",
@@ -70,9 +70,9 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "marketplace-ppc-management",
-    title: "Marketplace PPC Management",
-    shortTitle: "Marketplace PPC",
+    slug: "marketplace-ppc-advertising-management",
+    title: "Marketplace PPC & Advertising Management",
+    shortTitle: "Marketplace PPC & Advertising Management",
     icon: Megaphone,
     summary:
       "Drive more sales with strategic marketplace advertising across Amazon, Walmart, eBay, and other platforms. We manage PPC campaigns, optimize ad performance, control spending, and improve advertising efficiency to support profitable growth.",
@@ -130,9 +130,9 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "listing-optimization-seo",
-    title: "Listing Optimization & SEO",
-    shortTitle: "Listing & SEO",
+    slug: "organic-ranking-sales-growth",
+    title: "Organic Ranking & Sales Growth",
+    shortTitle: "Organic Ranking & Sales Growth",
     icon: Search,
     summary:
       "Improve marketplace visibility with keyword-driven listing content, strategic SEO, and conversion-focused optimization designed to attract shoppers and increase organic sales.",

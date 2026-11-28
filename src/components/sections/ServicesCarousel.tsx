@@ -142,7 +142,7 @@ export function ServicesCarousel({
       >
         {services.map((service) => {
           const svgFirst =
-            service.slug === "marketplace-ppc-management" ||
+            service.slug === "marketplace-ppc-advertising-management" ||
             service.slug === "product-image-creative-design";
 
           const contentBlock = (
